@@ -2,6 +2,11 @@
 
 var MCP = require("./lib/mcp");
 
+MCP.ccommands = {
+  create_robot : MCP.create,
+  remove_robot : MCP.remove
+};
+
 module.exports = {
   MCP: require("./lib/mcp"),
 
