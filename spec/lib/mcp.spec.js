@@ -38,6 +38,22 @@ describe("MCP", function() {
     });
   });
 
+  describe('#remove', function () {
+    beforeEach(function () {
+      var opts = {name : "TestBot"};
+      MCP.create(opts);
+    });
+
+    it("removes robot from MCP", function() {
+      var opts = {name: "TestBot"};
+      var robot = MCP.robots[opts.name];
+      MCP.remove(opts);
+      expect(robot.halt).to.be.called;
+      expect(MCP.robots[opts.name]).to.be.eql(undefined);
+    })
+
+  });
+
   describe("#start", function() {
     it("calls #start() on all robots", function() {
       var bot1 = { start: spy() },
