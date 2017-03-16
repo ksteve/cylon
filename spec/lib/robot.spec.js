@@ -477,6 +477,93 @@ describe("Robot", function() {
     });
   });
 
+  describe("#startConnection", function(){
+      var bot;
+      beforeEach(function() {
+          bot = new Robot({
+              connections: {
+                  //loopback: { adaptor: "loopback" }
+              },
+
+              devices: {
+                  // alpha: { driver: "ping" },
+                  // bravo: { driver: "ping" }
+              }
+          });
+
+        //  stub(bot.devices.alpha, "start").returns(true);
+        //  stub(bot.devices.bravo, "start").returns(true);
+      });
+
+      it("starts a single connection", function(){
+          bot.connection("wemo", {adaptor: "loopback"});
+          bot.startConnection(bot.connections.wemo, function(){
+              expect(bot.wemo).to.be.an.instanceOf(Adaptor);
+          });
+
+      });
+  });
+
+  describe("#removeConnection", function(){
+      var bot;
+      beforeEach(function() {
+          bot = new Robot({
+              connections: {
+                  loopback: { adaptor: "loopback" }
+              },
+
+              devices: {
+                  // alpha: { driver: "ping" },
+                  // bravo: { driver: "ping" }
+              }
+          });
+
+         // stub(bot.devices.alpha, "start").returns(true);
+         // stub(bot.devices.bravo, "start").returns(true);
+      });
+
+      it("removes a single connection", function(){
+          //bot.connection("wemo", {adaptor: "loopback"});
+          bot.removeConnection(bot.connections.loopback, function (value) {
+              expect(bot.loopback).to.be.undefined;
+          });
+      });
+
+
+
+  });
+
+  describe("#startDevice", function() {
+
+    var bot;
+      beforeEach(function() {
+          bot = new Robot({
+              connections: {
+                  loopback: { adaptor: "loopback" }
+              },
+
+              devices: {
+                 // alpha: { driver: "ping" },
+                 // bravo: { driver: "ping" }
+              }
+          });
+
+         // stub(bot.devices.alpha, "start").returns(true);
+         // stub(bot.devices.bravo, "start").returns(true);
+      });
+
+      it("starts a single device", function(){
+        bot.device("wemo", {driver: "ping"});
+        bot.startDevice(bot.devices.wemo, function(){
+            expect(bot.wemo).to.be.an.instanceOf(Driver);
+        });
+      });
+  });
+
+  describe("#removeDevice", function(){
+
+  });
+
   describe("#halt", function() {
     var bot, device, connection;
 
