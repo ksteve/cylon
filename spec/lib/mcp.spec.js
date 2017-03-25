@@ -9,7 +9,7 @@ describe("MCP", function() {
   });
 
   it("contains a collection of commands", function() {
-    expect(MCP.commands).to.have.all.keys('create_robot', 'remove_robot', 'init_cylon');
+    expect(MCP.commands).to.have.all.keys('create_robot', 'remove_robot', 'reset_robot');
   });
 
   it("contains a collection of events", function() {
@@ -48,18 +48,12 @@ describe("MCP", function() {
       var opts = {name: "TestBot"};
       var robot = MCP.robots[opts.name];
       robot.halt = spy();
-      MCP.remove(opts)
-          .then(function(){
+      MCP.remove(opts, function(){
               expect(robot.halt).to.be.called;
               console.log(MCP.robots[opts.name]);
               expect(MCP.robots[opts.name]).to.be.eql(undefined);
-          })
-          .catch(function(){
-
-          })
-
-    })
-
+          });
+    });
   });
 
   describe("#start", function() {
@@ -114,7 +108,7 @@ describe("MCP", function() {
     });
 
     it("contains an array of MCP commands", function() {
-      expect(json.commands).to.be.eql(['create_robot', 'remove_robot', 'init_cylon', 'echo']);
+      expect(json.commands).to.be.eql(['create_robot', 'remove_robot', 'reset_robot', 'echo']);
     });
 
     it("contains an array of MCP events", function() {
