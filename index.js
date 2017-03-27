@@ -30,6 +30,7 @@ process.on("SIGINT", function() {
   MCP.halt(process.kill.bind(process, process.pid));
 });
 
+
 if (process.platform === "win32") {
   var io = { input: process.stdin, output: process.stdout },
       quit = process.emit.bind(process, "SIGINT");
