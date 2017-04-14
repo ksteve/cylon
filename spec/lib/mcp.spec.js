@@ -5,7 +5,7 @@ var MCP = lib("mcp"),
 
 describe("MCP", function() {
   it("contains a collection of robots", function() {
-    expect(MCP.robots).to.have.keys('Test');
+    expect(MCP.robots).to.have.keys('test');
   });
 
   it("contains a collection of commands", function() {
